@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,5 @@ Route:: get('/hello',function(){
 Route:: get ('/hello',Function(){
     return "hello word";
 });
+
+Route::apiResource('/mahasiswa',MahasiswaController::class);
