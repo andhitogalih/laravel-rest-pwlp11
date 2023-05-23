@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMahasiswaRequests;
 use App\Http\Resources\MahasiswaResource;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -34,9 +35,20 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMahasiswaRequests $request)
     {
-        //
+        return new MahasiswaResource(Mahasiswa::create(
+            [
+                'Nim' => $request->Nim,
+                'Nama' => $request->Nama,
+                'Tanggal_Lahir' => $request->Tanggal_Lahir,
+                // 'featured_image' => $request->featured_image,
+                'kelas_id' => $request->Kelas,
+                'Jurusan' => $request->Jurusan,
+                'No_Handphone' => $request->No_Handphone,
+                'Email' => $request->Email,
+            ]
+        ));
     }
 
     /**
@@ -70,7 +82,17 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->update([
+            'Nim' => $request->Nim,
+            'Nama' => $request->Nama,
+            'featured_image' => $request->featured_image,
+            'Tanggal_Lahir' => $request->Tanggal_Lahir,
+            'Kelas' => $request->kelas_id,
+            'Jurusan' => $request->Jurusan,
+            'No_Handphone' => $request->No_Handphone,
+            'Email' => $request->Email,
+        ]);
+        return new MahasiswaResource($mahasiswa);
     }
 
     /**
@@ -81,6 +103,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        return response()->noContent();
     }
 }

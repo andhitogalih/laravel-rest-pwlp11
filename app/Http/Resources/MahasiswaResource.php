@@ -15,9 +15,14 @@ class MahasiswaResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'nim'=>$this->Nim,
-            'nama'=>$this->Nama,
-            'jurusan'=> strtoupper($this->Jurusan)
+            'Nim' => $this->Nim,
+            'Nama' => $this->Nama,
+            'featured_image' => $this->featured_image,
+            'Tanggal_Lahir' => $this->Tanggal_Lahir,
+            'Kelas' => $this->kelas_id,
+            "Jurusan" => strtoupper($this->Jurusan),
+            'No_Handphone' => $this->No_Handphone,
+            'Email' => $this->Email,
         ];
     }
 }
